@@ -101,5 +101,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, STATIC_URL.strip("/"))
+PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
+CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 
