@@ -108,3 +108,17 @@ PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 
 SITE_ID = 1
+
+##################
+# LOCAL SETTINGS #
+##################
+
+# Allow any settings to be defined in local_settings.py which should be
+# ignored in your version control system allowing for settings to be
+# defined per machine.
+try:
+    from local_settings import *
+except ImportError as e:
+    if "local_settings" not in str(e):
+        raise e
+
