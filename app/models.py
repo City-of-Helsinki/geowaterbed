@@ -6,9 +6,9 @@ class Observer(models.Model):
     location = models.CharField(max_length=512)
     min = models.IntegerField()
     max = models.IntegerField()
-    avh = models.IntegerField()
-    halymin = models.IntegerField()
-    halymax = models.IntegerField()
+    avg = models.IntegerField()
+    halymin = models.IntegerField(default=None, null=True)
+    halymax = models.IntegerField(default=None, null=True)
 
 
 class Observations(models.Model):

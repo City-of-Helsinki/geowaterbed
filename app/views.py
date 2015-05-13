@@ -4,11 +4,11 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 
-from .models import Observations
-from .serializers import ObservationSerializer
+from .models import Observer
+from .serializers import ObserverSerializer
 
 
-class ObservationViewSet(viewsets.ModelViewSet):
-    queryset = Observations.objects.all()
-    serializer_class = ObservationSerializer
+class ObserverViewSet(viewsets.ModelViewSet):
+    queryset = Observer.objects.all()
+    serializer_class = ObserverSerializer
 
