@@ -37,10 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'rest_framework',
-    'debug_toolbar',
-    'app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,9 +85,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'fi-FI'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'EET'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -105,26 +101,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#
-# Basic placement stuff so Django keeps its root where this setting resides
-#
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, STATIC_URL.strip("/"))
 PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 
 SITE_ID = 1
-
-##################
-# LOCAL SETTINGS #
-##################
-
-# Allow any settings to be defined in local_settings.py which should be
-# ignored in your version control system allowing for settings to be
-# defined per machine.
-try:
-    from local_settings import *
-except ImportError as e:
-    if "local_settings" not in str(e):
-        raise e
-
