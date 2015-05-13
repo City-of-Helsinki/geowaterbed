@@ -3,12 +3,14 @@ from django.db import models
 
 
 class Observer(models.Model):
-    location = models.CharField(max_length=512)
-    min = models.IntegerField()
-    max = models.IntegerField()
-    avg = models.IntegerField()
-    halymin = models.IntegerField(default=None, null=True)
-    halymax = models.IntegerField(default=None, null=True)
+    location = models.CharField("Coordinates of observer", max_length=512)
+    min = models.IntegerField("lowest observed measurement")
+    max = models.IntegerField("highest observed measurement")
+    avg = models.IntegerField("average observed measurement")
+    halymin = models.IntegerField("variations in the lower region", default=None, null=True,
+                                  help_text="not available in all observers")
+    halymax = models.IntegerField("variations in the higher region", default=None, null=True,
+                                  help_text="not available in all observers")
 
 
 class Observations(models.Model):

@@ -9,6 +9,13 @@ from .serializers import ObserverSerializer
 
 
 class ObserverViewSet(viewsets.ModelViewSet):
+    """
+    ## Observers information
+
+     * Collecting observations from measurement points
+     * Reporting all observations from all observers
+
+    """
     queryset = Observer.objects.all()
     serializer_class = ObserverSerializer
 
