@@ -14,4 +14,4 @@ class Observer(models.Model):
 class Observations(models.Model):
     measurement = models.IntegerField()
     moment = models.DateField()
-    observer = models.ForeignKey(Observer, default=None)
+    observer = models.ForeignKey(Observer, default=None, related_name="observations")
