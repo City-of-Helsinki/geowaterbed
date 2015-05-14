@@ -17,9 +17,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from app.urls import router
-
+import app.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include(router.urls))
+    url(r'^api/', include(router.urls)),
+    url(r'', include(app.urls))
 ]

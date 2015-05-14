@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import Observer
 
-# Register your models here.
+
+class ObserverAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Observer, ObserverAdmin)

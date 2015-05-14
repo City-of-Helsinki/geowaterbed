@@ -12,6 +12,9 @@ class Observer(models.Model):
     halymax = models.IntegerField("variations in the higher region", default=None, null=True,
                                   help_text="not available in all observers")
 
+    def __unicode__(self):
+        return self.location
+
 
 class Observations(models.Model):
     measurement = models.IntegerField()
