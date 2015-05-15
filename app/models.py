@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Observer(models.Model):
+    name = models.CharField(max_length=512)
     location = models.CharField("Coordinates of observer", max_length=512)
     min = models.IntegerField("lowest observed measurement")
     max = models.IntegerField("highest observed measurement")

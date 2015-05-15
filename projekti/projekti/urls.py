@@ -19,8 +19,13 @@ from django.contrib import admin
 from app.urls import router
 import app.urls
 
-urlpatterns = [
+from django.conf.urls.static import static
+from django.conf import settings
+
+urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
+
     url(r'', include(app.urls))
 ]
