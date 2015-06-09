@@ -1,6 +1,11 @@
 
 {% extends "app/base.html" %}
+{% block media %}
+     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+{% endblock media %}
 {% block content %}
+     <div id="map"></div>
 <ul>
 {% for obj in queryset %}
     <li>{{ obj }}</li>
