@@ -60,3 +60,5 @@ var mapOptions = {
 var map = L.map('map', mapOptions).setView([60.171944, 24.941389], 5);
 
 //L.control.layers(layers).addTo(map);
+
+var marker = L.marker([60.171855296861, 24.9424839040419]).addTo(map);
