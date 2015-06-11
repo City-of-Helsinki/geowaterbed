@@ -1,4 +1,6 @@
 
 h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
-#map { height: 180px; }
+#map { height: 35em;
+    width: 35em;
+}

@@ -1,8 +1,12 @@
 
 {% extends "app/base.html" %}
+{% load staticfiles %}
 {% block media %}
      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
-     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+    <script src="https://raw.githubusercontent.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+    <script src="https://raw.githubusercontent.com/kartena/Proj4Leaflet/master/src/proj4leaflet.js"></script>
+
 {% endblock media %}
 {% block content %}
      <div id="map"></div>
@@ -11,4 +15,5 @@
     <li>{{ obj }}</li>
 {% endfor %}
 </ul>
+    <script src="{% static "app/map.js" %}"></script>
 {% endblock content %}
