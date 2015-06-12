@@ -41,3 +41,23 @@ def save(data):
                 measurement=obs.measurement,
                 observer=d)
             dobs.save()
+
+
+def coordinator(point_lines):
+    """
+    For a list of lines from pisteetETRS.txt
+    containing coordinates for observation stations
+    converts coordinates to EPGS:3879 and
+    saves them to db
+
+    Uses custom SQL with Postgis things so beware
+
+    :param point_lines:
+    :return: None
+    """
+
+    from django.db import connection
+    cursor = connection.cursor()
+    for i in point_lines:
+        name, x, y = reversed(i.split(" "))
+        cursor.execute("select ST_AsText(ST_Transform(ST_GeomFromText('POINT(%s %s)', 3879), 4326))" % (x, y))
