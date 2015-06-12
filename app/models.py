@@ -5,12 +5,12 @@ from django.db import models
 class Observer(models.Model):
     name = models.CharField(max_length=512)
     location = models.CharField("Coordinates of observer", max_length=512)
-    min = models.IntegerField("lowest observed measurement")
-    max = models.IntegerField("highest observed measurement")
-    avg = models.IntegerField("average observed measurement")
-    halymin = models.IntegerField("variations in the lower region", default=None, null=True,
+    min = models.FloatField("lowest observed measurement")
+    max = models.FloatField("highest observed measurement")
+    avg = models.FloatField("average observed measurement")
+    halymin = models.FloatField("variations in the lower region", default=None, null=True,
                                   help_text="not available in all observers")
-    halymax = models.IntegerField("variations in the higher region", default=None, null=True,
+    halymax = models.FloatField("variations in the higher region", default=None, null=True,
                                   help_text="not available in all observers")
 
     def __unicode__(self):
@@ -18,6 +18,6 @@ class Observer(models.Model):
 
 
 class Observations(models.Model):
-    measurement = models.IntegerField()
+    measurement = models.FloatField()
     moment = models.DateField()
     observer = models.ForeignKey(Observer, default=None, related_name="observations")
