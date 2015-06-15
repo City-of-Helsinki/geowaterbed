@@ -6,14 +6,17 @@
     <script src="https://raw.githubusercontent.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
     <script src="https://raw.githubusercontent.com/kartena/Proj4Leaflet/master/src/proj4leaflet.js"></script>
+    <script src="{% static "app/chart.js" %}"></script>
 
 {% endblock media %}
 {% block content %}
      <div id="map"></div>
+    <canvas id="obschart" width="400" height="400"></canvas>
 <ul>
-{% for obj in queryset %}
-    <li>{{ obj }}</li>
+{% for observator in queryset %}
+    <li>{{ observator }}</li>
 {% endfor %}
 </ul>
     <script src="{% static "app/servicemap.js" %}"></script>
+    <script src="{% static "app/observations.js" %}"></script>
 {% endblock content %}
