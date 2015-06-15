@@ -1,33 +1,57 @@
 
-var labels = ["January", "February", "March", "April", "May", "June", "July"];
-var data = [4,6,10,20,22,43, 12];
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: 'USD to EUR exchange rate from 2006 through 2008'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                    'Click and drag in the plot area to zoom in' :
+                    'Pinch the chart to zoom in'
+        },
+        xAxis: {
+            type: 'datetime',
+            //minRange: 28 * 24 * 3600000 // fourteen days
+        },
+        yAxis: {
+            title: {
+                text: 'Exchange rate'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
 
-var config = {
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-        }
-    ]
-};
-
-function set_chart(labels, data, config) {
-    config.labels = labels;
-    config.datasets[0].data = data;
-    return config;
-}
-
-var ctx = document.getElementById("obschart").getContext("2d");
-
-function create_chart(labels, data, config, ctx) {
-    var myLineChart = new Chart(ctx).Line(set_chart(
-        labels, data, config
-    ), {});
-}
-
-create_chart(labels, data, config, ctx);
+        series: [{
+            type: 'area',
+            name: 'USD to EUR',
+            //pointInterval: 24 * 3600 * 1000,
+            //pointStart: Date.UTC(SERIES.first[0], SERIES.first[1], SERIES.first[2]),
+            data: SERIES.data
+        }]
+    });
+});
