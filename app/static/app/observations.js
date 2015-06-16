@@ -1,5 +1,12 @@
 
 $(function () {
+    // ISO date to epoch seconds
+    for (var i= 0; i<SERIES.data.length; i++) {
+        var d = new Date(SERIES.data[i][0]);
+        var dd = d.getTime();
+        SERIES.data[i][0] = dd;
+    }
+
     $('#container').highcharts({
         chart: {
             zoomType: 'x'
