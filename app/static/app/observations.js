@@ -12,7 +12,7 @@ $(function () {
             zoomType: 'x'
         },
         title: {
-            text: 'USD to EUR exchange rate from 2006 through 2008'
+            text: 'Pohjaveden korkeus ja normaalitaso'
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -25,8 +25,16 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Exchange rate'
-            }
+                text: 'Pohjaveden korkeus'
+            },
+            plotLines:[{
+                    value: SERIES.avg,
+                    color: '#ff0000',
+                    width: 2,
+                    zIndex: 4,
+                    label: {text: 'keskiarvo'}
+                }]
+
         },
         legend: {
             enabled: false
@@ -55,7 +63,7 @@ $(function () {
 
         series: [{
             type: 'area',
-            name: 'USD to EUR',
+            name: 'Pohjaveden korkeus',
             //pointInterval: 24 * 3600 * 1000,
             //pointStart: Date.UTC(SERIES.first[0], SERIES.first[1], SERIES.first[2]),
             data: SERIES.data

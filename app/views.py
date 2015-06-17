@@ -29,10 +29,13 @@ def get_observations(queryset):
     series = {"data": [(i.moment.isoformat(), i.measurement) for i in queryset.all().order_by('moment')],
               "first": first,
               "last": last}
-    return json.dumps(series)
+    return series
 
 
 def index(request):
     selected = Observer.objects.get(id=1)
+    data = get_observations(selected.observations.all())
+    data['avg'] = selected.avg
+    jsdata = json.dumps(data)
     return render(request, "app/index.html", {'queryset': Observer.objects.all(),
-                                              'observations': get_observations(selected.observations.all())})
+                                              'observations': jsdata})
