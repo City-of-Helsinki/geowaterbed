@@ -25,8 +25,7 @@ def get_observations(queryset):
     first = [first_dt.year, first_dt.month, first_dt.day]
     last_dt = queryset.last().moment
     last = [last_dt.year, last_dt.month, last_dt.day]
-
-    series = {"data": [(i.moment.isoformat(), i.measurement) for i in queryset.all().order_by('moment')],
+    series = {"data": [(time.mktime(i.moment.timetuple()) * 1000, i.measurement) for i in queryset.all().order_by('moment')],
               "first": first,
               "last": last}
     return series
