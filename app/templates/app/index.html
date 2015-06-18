@@ -15,13 +15,9 @@
 
 {% endblock media %}
 {% block content %}
-     <div id="map"></div>
-     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<ul>
-{% for observator in queryset %}
-    <li>{{ observator }}</li>
-{% endfor %}
-</ul>
+     <div id="map" style="float: left;"></div>
+     <div id="container" style="width:35em; height: 25em; margin: 0 auto"></div>
+
     <script src="{% static "app/observations.js" %}"></script>
     <script src="{% static "app/servicemap.js" %}"></script>
 {% endblock content %}
