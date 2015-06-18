@@ -96,11 +96,12 @@ makeMap()
 
 makeMark = (data) ->
     console.log data.title, data.x, data.y
-    marker = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
+    markers = {}
+    markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
         'title' : data.title,
         riseOnHover: true}
     ).addTo(map);
-    marker.bindPopup(data.content);
+    markers[data.title].bindPopup(data.content);
 
 
 makeMarks = () ->
@@ -109,7 +110,7 @@ makeMarks = () ->
             x: obs.location.x
             y: obs.location.y
             title: obs.name
-            content: obs.avg
+            content: "Keskiarvo " + obs.avg
 
 
 makeMarks()
