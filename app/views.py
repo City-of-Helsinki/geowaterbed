@@ -35,6 +35,22 @@ def index(request):
     selected = Observer.objects.get(id=1)
     data = get_observations(selected.observations.all())
     data['avg'] = selected.avg
+    data['selected'] = selected.name
+    data['observators'] = {}
+    for obs in Observer.objects.all():
+        if not obs.loc_x and not obs.loc_y:
+            # Empty location, not that useful for map
+            continue
+        data['observators'][obs.id] = {
+            'name': obs.name,
+            'location': {'x': obs.loc_x,
+                         'y': obs.loc_y},
+            'min': obs.min,
+            'max': obs.max,
+            'avg': obs.avg,
+            'halymin': obs.halymin,
+            'halymax': obs.halymax,
+        }
     jsdata = json.dumps(data)
     return render(request, "app/index.html", {'queryset': Observer.objects.all(),
                                               'observations': jsdata})

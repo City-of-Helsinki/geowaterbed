@@ -64,8 +64,10 @@ def coordinator(point_lines):
         cursor.execute("select ST_AsText(ST_Transform(ST_GeomFromText('POINT(%s %s)', 3879), 4326))" % (x, y))
         res = cursor.fetchone()[0]
         m = re.search(r'POINT\((.*?)\)', res).group(1)
-        pointers[name] = m.split(" ")
+        gps_y, gps_x = m.split(" ")
+        pointers[name] = [gps_x, gps_y]
     return pointers
+
 
 def update_coord(coords):
     for item_id, item in coords.items():
