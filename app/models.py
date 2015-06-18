@@ -5,6 +5,8 @@ from django.db import models
 class Observer(models.Model):
     name = models.CharField(max_length=512)
     location = models.CharField("Coordinates of observer", max_length=512)
+    loc_x = models.CharField(max_length=128, default=None, null=True)
+    loc_y = models.CharField(max_length=128, default=None, null=True)
     min = models.FloatField("lowest observed measurement")
     max = models.FloatField("highest observed measurement")
     avg = models.FloatField("average observed measurement")

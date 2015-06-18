@@ -1,4 +1,4 @@
-import datetime
+import datetime, re
 
 from .models import Observer, Observations
 
@@ -58,6 +58,20 @@ def coordinator(point_lines):
 
     from django.db import connection
     cursor = connection.cursor()
+    pointers = {}
     for i in point_lines:
         name, x, y = reversed(i.split(" "))
         cursor.execute("select ST_AsText(ST_Transform(ST_GeomFromText('POINT(%s %s)', 3879), 4326))" % (x, y))
+        res = cursor.fetchone()[0]
+        m = re.search(r'POINT\((.*?)\)', res).group(1)
+        pointers[name] = m.split(" ")
+    return pointers
+
+def update_coord(coords):
+    for item_id, item in coords.items():
+        name = item_id.lower() + '.txt'
+        print item_id, name
+        d = Observer.objects.get(name=name)  # observator ids' are inconsistent
+        d.loc_x = item[0]
+        d.loc_y = item[1]
+        d.save()
