@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -33,15 +34,14 @@ def get_observations(queryset):
 
 def index(request):
     selected = Observer.objects.get(id=1)
-    data = get_observations(selected.observations.all())
-    data['avg'] = selected.avg
+    data = {}
     data['selected'] = selected.name
     data['observators'] = {}
     for obs in Observer.objects.all():
         if not obs.loc_x and not obs.loc_y:
             # Empty location, not that useful for map
             continue
-        data['observators'][obs.id] = {
+        data['observators'][obs.name] = {
             'name': obs.name,
             'location': {'x': obs.loc_x,
                          'y': obs.loc_y},
@@ -51,6 +51,13 @@ def index(request):
             'halymin': obs.halymin,
             'halymax': obs.halymax,
         }
+    data['observators'][selected.name]['observations'] = get_observations(selected.observations.all())
+
     jsdata = json.dumps(data)
     return render(request, "app/index.html", {'queryset': Observer.objects.all(),
                                               'observations': jsdata})
+
+def detail(request, name):
+    selected = get_object_or_404(Observer, name=name)
+    data = get_observations(selected.observations.all())
+    return JsonResponse(data)

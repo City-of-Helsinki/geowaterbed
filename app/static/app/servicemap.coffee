@@ -95,13 +95,14 @@ makeMap()
 
 
 makeMark = (data) ->
-    console.log data.title, data.x, data.y
     markers = {}
     markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
         'title' : data.title,
         riseOnHover: true}
     ).addTo(map);
     markers[data.title].bindPopup(data.content);
+    markers[data.title].on 'click', (ev) ->
+        update_observator(data.title)
 
 
 makeMarks = () ->

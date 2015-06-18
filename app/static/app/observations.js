@@ -1,5 +1,5 @@
 
-$(function () {
+function charter () {
 
     $('#container').highcharts({
         chart: {
@@ -22,7 +22,7 @@ $(function () {
                 text: 'Pohjaveden korkeus'
             },
             plotLines:[{
-                    value: SERIES.avg,
+                    value: SERIES.observators[SERIES.selected].avg,
                     color: '#ff0000',
                     width: 2,
                     zIndex: 4,
@@ -60,7 +60,22 @@ $(function () {
             name: 'Pohjaveden korkeus',
             //pointInterval: 24 * 3600 * 1000,
             //pointStart: Date.UTC(SERIES.first[0], SERIES.first[1], SERIES.first[2]),
-            data: SERIES.data
+            data: SERIES.observators[SERIES.selected].observations.data
         }]
     });
-});
+}
+
+charter()
+
+function update_observator(key) {
+    if (SERIES.observators[key].observations) {
+        SERIES.selected = key;
+        charter();
+    } else {
+        $.getJSON('/' + key + '/', function (resp, status) {
+            SERIES.observators[key].observations = resp;
+            SERIES.selected = key;
+            charter();
+        })
+    }
+}
