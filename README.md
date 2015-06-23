@@ -1,3 +1,3 @@
-# Django start
+# Application to show information from water bed meters
 
-A working app as an Django example for code fellows (and others)
+http://www.hel.fi/www/Helsinki/fi/asuminen-ja-ymparisto/tontit/maa-ja-kalliopera/pohjavesi/
