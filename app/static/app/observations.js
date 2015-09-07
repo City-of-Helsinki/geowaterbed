@@ -1,7 +1,10 @@
 
+var chart = null;
+
 function charter () {
-    $('#container').highcharts({
+        chart = new Highcharts.Chart({
         chart: {
+            renderTo: 'container',
             zoomType: 'x'
         },
         title: {
@@ -75,4 +78,8 @@ function update_observator(key) {
             charter();
         })
     }
+}
+
+function chart_reflow() {
+    chart.reflow();
 }

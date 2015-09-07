@@ -4,7 +4,10 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 #map {
     height: 30em;
     width: 30em;
+    float: left;
 }
+
 #container {
-    width:35em; height: 25em; margin: 0 auto;
+    width:35em; height: 25em;
+    margin: 0 auto;
 }

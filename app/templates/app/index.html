@@ -2,6 +2,7 @@
 {% extends "app/base.html" %}
 {% load staticfiles %}
 {% block media %}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
     <script src="{% static 'app/jquery.min.js' %}"></script>
     <script src="{% static 'app/proj4-compressed.js' %}"></script>
@@ -16,7 +17,7 @@
 {% endblock media %}
 {% block content %}
     <div id="app">
-         <div id="map" style="float: left;"></div>
+         <div id="map"></div>
          <div id="container"></div>
     </div>
     <script src="{% static "app/observations.js" %}"></script>
