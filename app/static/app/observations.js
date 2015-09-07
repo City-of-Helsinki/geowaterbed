@@ -1,6 +1,5 @@
 
 function charter () {
-
     $('#container').highcharts({
         chart: {
             zoomType: 'x'
@@ -64,8 +63,6 @@ function charter () {
         }]
     });
 }
-
-charter()
 
 function update_observator(key) {
     if (SERIES.observators[key].observations) {
