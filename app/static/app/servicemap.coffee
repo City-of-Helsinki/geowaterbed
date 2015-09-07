@@ -83,7 +83,7 @@ makeMap = ->
 
     mapOptions =
         crs: crs
-        continuusWorld: true
+        continuousWorld: true
         worldCopyJump: false
         closePopupOnClick: false
         maxBounds: getMaxBounds options.style
