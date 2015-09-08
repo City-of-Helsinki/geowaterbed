@@ -14,20 +14,20 @@ function respond() {
     console.log('respond activate', height, width, isRetinaDisplay());
 
     var chart_orig_width = $('#container').width();
+    var chart_orig_height = $('#container').height();
     var map_orig_width = $('#map').width();
+    var map_orig_height = $('#map').height();
 
     return function () {
         if (width < FULL_APP) {
-            console.log('mobile');
-            $("#app").css('max-width', width).toggleClass('mobile', true);
-            $("#container").css({'width': width, 'max-width' : width, 'max-height' : height, height: height});
+            $("#app").toggleClass('mobile', true).css('max-width', width);
+            $("#container").css({'width': width, 'max-width' : width, 'max-height' : map_orig_height, height: map_orig_height});
             $('#map').css('max-width', width);
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
         } else {
-            console.log('no mobile');
-            $("#app").css('max-width', 'auto').toggleClass('mobile', false);
+            $("#app").toggleClass('mobile', false).css('max-width', 'auto');
             $("#container").css({'width': chart_orig_width, 'max-width' : 'auto', 'max-height' : 'auto'});
             $('#map').css({'width': chart_orig_width, 'max-width' : 'auto'});
             window.requestAnimationFrame(function () {
@@ -35,11 +35,17 @@ function respond() {
             });
         }
     }
-
 }
 
 $(document).ready(function() {
+
+    // Draw the chart
     charter();
+
+    $('#container_mobiletoolbar button').click(function () {
+        $('#contained_chart').hide();
+    });
+
     $(window).bind('resize', respond());
     $(window).resize();
 });

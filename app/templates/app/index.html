@@ -18,7 +18,10 @@
 {% block content %}
     <div id="app">
          <div id="map"></div>
-         <div id="container"></div>
+         <div id="contained_chart">
+             <div id="container_mobiletoolbar"><button>X</button></div>
+             <div id="container"></div>
+         </div>
     </div>
     <script src="{% static "app/observations.js" %}"></script>
     <script src="{% static "app/servicemap.js" %}"></script>

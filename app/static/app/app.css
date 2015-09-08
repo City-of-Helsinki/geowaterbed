@@ -1,13 +1,29 @@
 
 h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
+#app { position: relative; }
+
 #map {
     height: 30em;
     width: 30em;
     float: left;
+    z-index: 1;
+    position: relative;
 }
 
 #container {
     width:35em; height: 25em;
     margin: 0 auto;
+}
+
+.mobile #contained_chart {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mobile #container_mobiletoolbar {
+    text-align: right;
+    background: white;
 }
