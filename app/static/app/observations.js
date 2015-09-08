@@ -70,12 +70,12 @@ function charter () {
 function update_observator(key) {
     if (SERIES.observators[key].observations) {
         SERIES.selected = key;
-        charter();
+        chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
     } else {
         $.getJSON('/' + key + '/', function (resp, status) {
             SERIES.observators[key].observations = resp;
             SERIES.selected = key;
-            charter();
+            chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
         })
     }
 }
