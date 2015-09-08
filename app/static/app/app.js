@@ -19,6 +19,8 @@ function respond() {
     var map_orig_height = $('#map').height();
 
     return function () {
+        var height = $(window).height();
+        var width = $(window).width() - 20;
         if (width < FULL_APP) {
             $("#app").toggleClass('mobile', true).css('max-width', width);
             $("#container").css({'width': width, 'max-width' : width, 'max-height' : map_orig_height, height: map_orig_height});
