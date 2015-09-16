@@ -103,6 +103,7 @@ makeMark = (data) ->
     markers[data.title].bindPopup(data.content);
     markers[data.title].on 'click', (ev) ->
         update_observator(data.title)
+        $('#contained_chart').show()
 
 
 makeMarks = () ->
