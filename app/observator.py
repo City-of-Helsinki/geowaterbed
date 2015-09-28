@@ -82,3 +82,31 @@ POSTGRES_PROJECTION_SETTINGS = """
 INSERT INTO "spatial_ref_sys" ("srid","auth_name","auth_srid","srtext","proj4text") VALUES (3879,'EPSG',3879,'PROJCS["ETRS89 / ETRS-GK25FIN",GEOGCS["ETRS89",DATUM["European_Terrestrial_Reference_System_1989",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6258"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4258"]],UNIT["metre",1,AUTHORITY["EPSG","9001"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",25],PARAMETER["scale_factor",1],PARAMETER["false_easting",25500000],PARAMETER["false_northing",0],AUTHORITY["EPSG","3879"],AXIS["Northing",NORTH],AXIS["Easting",EAST]]','+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ');
 select ST_AsText(ST_Transform(ST_GeomFromText('POINT(25496807.262 6673221.252)', 3879), 4326));
 """
+
+OBSERVATION_POINTS_ADDRESSES = """
+        { "FIN_6126_116O", "Orsiveden taso Helsingin Rautatieasemalla" },
+        { "FIN_6126_484O", "Orsiveden taso Aleksis Kivenkatu 40:ss<E4>" },
+        { "FIN_6126_487O", "Orsiveden taso Dagmarinkatu 6:ssa" },
+        { "FIN_6126_215O", "Orsiveden taso Aleksanterinkatu 36:ssa" },
+        { "FIN_6126_219O", "Orsiveden taso Aleksanterinkatu 15:ss<E4>" },
+        { "FIN_6126_312O", "Orsiveden taso Urheilukatu 26:ssa" },
+        { "FIN_6126_116P", "Pohjaveden taso Helsingin Rautatieasemalla" },
+        { "FIN_6170_3P", "Pohjaveden taso Kravuntie 20:ss<E4>" },
+        { "FIN_6170_4P", "Pohjaveden taso Suopursuntie 6:ssa" },
+        { "FIN_6126_100P", "Pohjaveden taso Kaisaniemess<E4>" },
+        { "FIN_6126_215P", "Pohjaveden taso Aleksanterinkatu 36:ssa" },
+        { "FIN_6126_219P", "Pohjaveden taso Aleksanterinkatu 15:ss<E4>" },
+        { "FIN_10220_04P", "Pohjaveden taso H<E4>rk<E4>valjakontie 16:ssa" },
+        { "FIN_10409_01P", "Pohjaveden taso Pohjoisesplanadi 35:ssa" },
+        { "FIN_11028_5P", "Pohjaveden taso Mannerheimintie 8:ss<E4>" },
+        { "FIN_11028_2P", "Pohjaveden taso Mannerheimintie 3:ss<E4>" },
+        { "FIN_11028_4P", "Pohjaveden taso Pohjoisesplanadi 29:ssa" },
+        { "FIN_11028_6P", "Pohjaveden taso Mannerheimintie 20:ss<E4>" },
+        { "FIN_11028_7P", "Pohjaveden taso Mannerheimintie 1:ss<E4>" },
+        { "FIN_11028_3P", "Pohjaveden taso Kluuvikatu 7:ss<E4>" },
+        { "FIN_11163_1P", "Pohjaveden taso Mikonkatu 5:ss<E4>" },
+        { "FIN_6126_148P", "Pohjaveden taso Pohjoisesplanadi 25:ssa" },
+        { "FIN_6126_382P", "Pohjaveden taso Havis Amandan patsaalla" },
+        { "FIN_6126_384P", "Pohjaveden taso Haapatie 29:ss<E4>" },
+        { "FIN_6126_387P", "Pohjaveden taso Kotinummenpuistossa" },
+"""
