@@ -1,6 +1,10 @@
 
 from django.db import models
 
+OBSERVER_TYPES = (
+    ('orsi', 'Orsivesi'),
+    ('pohja', 'Pohjavesi'),
+)
 
 class Observer(models.Model):
     name = models.CharField(max_length=512)
@@ -14,6 +18,9 @@ class Observer(models.Model):
                                   help_text="not available in all observers")
     halymax = models.FloatField("variations in the higher region", default=None, null=True,
                                   help_text="not available in all observers")
+    type = models.CharField("type of observation measure", max_length=10,
+                            choices=OBSERVER_TYPES,
+                            default=None, null=True)
 
     def __unicode__(self):
         return self.location
