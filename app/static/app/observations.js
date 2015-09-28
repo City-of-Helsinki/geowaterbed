@@ -28,7 +28,8 @@ function charter () {
                     color: '#ff0000',
                     width: 2,
                     zIndex: 4,
-                    label: {text: 'keskiarvo'}
+                    label: {text: 'keskiarvo'},
+                    id: 'avg'
                 }]
 
         },
@@ -71,11 +72,29 @@ function update_observator(key) {
     if (SERIES.observators[key].observations) {
         SERIES.selected = key;
         chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
+        chart.yAxis[0].removePlotLine('avg');
+        chart.yAxis[0].addPlotLine({
+            value: SERIES.observators[SERIES.selected].avg,
+            color: '#ff0000',
+            width: 2,
+            zIndex: 4,
+            label: {text: 'keskiarvo'},
+            id: 'avg'
+        });
     } else {
         $.getJSON('/' + key + '/', function (resp, status) {
             SERIES.observators[key].observations = resp;
             SERIES.selected = key;
             chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
+            chart.yAxis[0].removePlotLine('avg');
+            chart.yAxis[0].addPlotLine({
+                value: SERIES.observators[SERIES.selected].avg,
+                color: '#ff0000',
+                width: 2,
+                zIndex: 4,
+                label: {text: 'keskiarvo'},
+                id: 'avg'
+            });
         })
     }
 }
