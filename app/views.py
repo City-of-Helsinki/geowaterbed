@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 
 # Create your views here.
 
@@ -31,6 +31,18 @@ def get_observations(queryset):
               "last": last}
     return series
 
+def get_data(observator, span):
+
+    if span == 'all':
+        return get_observations(observator.observations.all())
+
+    first_date = observator.observations.last().moment
+    if not span:
+        span = first_date + relativedelta(months=-DEFAULT_MONTH_SPAN)
+    else:
+        span = first_date + relativedelta(months=-span)
+
+    return get_observations(observator.observations.filter(moment__gt=span))
 
 def index(request):
     selected = Observer.objects.get(id=1)
@@ -51,13 +63,25 @@ def index(request):
             'halymin': obs.halymin,
             'halymax': obs.halymax,
         }
-    data['observators'][selected.name]['observations'] = get_observations(selected.observations.all())
+    data['observators'][selected.name]['observations'] = get_data(selected, DEFAULT_MONTH_SPAN)
 
     jsdata = json.dumps(data)
     return render(request, "app/index.html", {'queryset': Observer.objects.all(),
                                               'observations': jsdata})
 
-def detail(request, name):
+DEFAULT_MONTH_SPAN = 6
+
+import datetime
+from dateutil.relativedelta import relativedelta
+
+def detail(request, name, span=None):
+    if span and span is not 'all':
+        try:
+            span = int(span)
+            if span > 50:
+                raise ValueError
+        except ValueError:
+            return HttpResponseBadRequest('Value of span must be all or integer less than 50')
     selected = get_object_or_404(Observer, name=name)
-    data = get_observations(selected.observations.all())
+    data = get_data(selected, span)
     return JsonResponse(data)
