@@ -50,4 +50,9 @@ $(document).ready(function() {
 
     $(window).bind('resize', respond());
     $(window).resize();
+
+    $('#timerange_toolbar').click(function (e) {
+        console.log(e.target.value);
+    });
+
 });

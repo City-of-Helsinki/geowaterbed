@@ -114,7 +114,7 @@ function update_observator(key) {
         chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
         update_plotlines()
     } else {
-        $.getJSON('/' + key + '/', function (resp, status) {
+        $.getJSON('data/' + key, function (resp, status) {
             SERIES.observators[key].observations = resp;
             SERIES.selected = key;
             chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);

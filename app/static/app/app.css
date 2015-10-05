@@ -11,7 +11,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     position: relative;
 }
 
-#container {
+#container_chart {
     width:35em; height: 25em;
     margin: 0 auto;
 }

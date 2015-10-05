@@ -9,6 +9,7 @@ router.register(r'observers', views.ObserverViewSet)
 from django.conf.urls import include, url
 
 urlpatterns = [
-    url(r'(.*)/(.*)/', views.detail),
-    url(r'^', views.index)
+    url(r'data/(.*)/(.*)', views.detail),
+    url(r'data/(.*)', views.detail),
+    url(r'$', views.index)
 ]
