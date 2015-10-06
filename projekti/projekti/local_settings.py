@@ -8,7 +8,7 @@ DATABASES = {
         # DB name or path to database file if using sqlite3.
         "NAME": os.environ.get("DATABASE_NAME", "vesi"),
         # Not used with sqlite3.
-        "USER": os.environ.get("DATABASE_USER", "jta"),
+        "USER": os.environ.get("DATABASE_USER", os.environ.get('USER')),
         # Not used with sqlite3.
         "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
         # Set to empty string for localhost. Not used with sqlite3.
