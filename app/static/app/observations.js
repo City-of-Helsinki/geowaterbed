@@ -77,8 +77,6 @@ function charter () {
         series: [{
             type: 'area',
             name: 'Pohjaveden korkeus',
-            //pointInterval: 24 * 3600 * 1000,
-            //pointStart: Date.UTC(SERIES.first[0], SERIES.first[1], SERIES.first[2]),
             data: SERIES.observators[SERIES.selected].observations.data
         }]
     });

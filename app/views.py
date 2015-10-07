@@ -22,14 +22,12 @@ class ObserverViewSet(viewsets.ModelViewSet):
 
 
 def get_observations(queryset):
-    first_dt = queryset.first().moment
-    first = [first_dt.year, first_dt.month, first_dt.day]
-    last_dt = queryset.last().moment
-    last = [last_dt.year, last_dt.month, last_dt.day]
-    series = {"data": [(time.mktime(i.moment.timetuple()) * 1000, i.measurement) for i in queryset.all().order_by('moment')],
-              "first": first,
-              "last": last}
-    return series
+    return {
+        "data": [
+            (time.mktime(i.moment.timetuple()) * 1000, i.measurement)
+                for i in queryset.all().order_by('moment')
+            ]
+    }
 
 def get_data(observator, span):
 
@@ -49,6 +47,7 @@ def index(request):
     data = {}
     data['selected'] = selected.name
     data['observators'] = {}
+
     for obs in Observer.objects.all():
         if not obs.loc_x and not obs.loc_y:
             # Empty location, not that useful for map
@@ -63,6 +62,7 @@ def index(request):
             'halymin': obs.halymin,
             'halymax': obs.halymax,
         }
+
     data['observators'][selected.name]['observations'] = get_data(selected, DEFAULT_MONTH_SPAN)
 
     jsdata = json.dumps(data)
