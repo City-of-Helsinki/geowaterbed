@@ -27,3 +27,8 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     text-align: right;
     background: white;
 }
+
+#timerange_toolbar button.active {
+    color: blue;
+    font-weight: bold;;
+}
