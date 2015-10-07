@@ -52,7 +52,9 @@ $(document).ready(function() {
     $(window).resize();
 
     $('#timerange_toolbar').click(function (e) {
-        console.log(e.target.value);
+        console.log("setting range", e.target.value);
+        SERIES.range = e.target.value;
+        update_observator(SERIES.selected)
     });
 
 });
