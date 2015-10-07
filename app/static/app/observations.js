@@ -77,7 +77,7 @@ function charter () {
         series: [{
             type: 'area',
             name: 'Pohjaveden korkeus',
-            data: SERIES.observators[SERIES.selected].observations.data
+            data: filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data)
         }]
     });
 }
@@ -109,16 +109,37 @@ function update_plotlines() {
 function update_observator(key) {
     if (SERIES.observators[key].observations) {
         SERIES.selected = key;
-        chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
+        chart.series[0].setData(filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data));
         update_plotlines()
     } else {
         $.getJSON('data/' + key, function (resp, status) {
             SERIES.observators[key].observations = resp;
             SERIES.selected = key;
-            chart.series[0].setData(SERIES.observators[SERIES.selected].observations.data);
+            chart.series[0].setData(filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data));
             update_plotlines()
         })
     }
+}
+
+function filter_data(range, data) {
+
+    if (range === 'all') return data;
+
+    // Take last observation which is assumed to be latest
+    var last = data[data.length - 1];
+    // get Unix time in ms span months from this moment
+    var last_moment = moment(last[0]);
+    var range_before = last_moment.subtract(range, 'months').valueOf();
+
+    var filtered = [];
+    for (var i=0; i < data.length; i++) {
+        var datum = data[i];
+        if (datum[0] >= range_before) {
+            filtered.push(datum)
+        }
+    }
+
+    return filtered;
 }
 
 function chart_reflow() {

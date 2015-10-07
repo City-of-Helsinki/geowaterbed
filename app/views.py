@@ -46,6 +46,7 @@ def index(request):
     selected = Observer.objects.get(id=1)
     data = {}
     data['selected'] = selected.name
+    data['range'] = DEFAULT_MONTH_SPAN
     data['observators'] = {}
 
     for obs in Observer.objects.all():
@@ -63,7 +64,7 @@ def index(request):
             'halymax': obs.halymax,
         }
 
-    data['observators'][selected.name]['observations'] = get_data(selected, DEFAULT_MONTH_SPAN)
+    data['observators'][selected.name]['observations'] = get_data(selected, "all")
 
     jsdata = json.dumps(data)
     return render(request, "app/index.html", {'queryset': Observer.objects.all(),
