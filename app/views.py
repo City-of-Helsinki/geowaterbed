@@ -62,7 +62,8 @@ def index(request):
             'avg': obs.avg,
             'halymin': obs.halymin,
             'halymax': obs.halymax,
-            'type': obs.type
+            'type': obs.type,
+            'address': obs.address
         }
 
     data['observators'][selected.name]['observations'] = get_data(selected, "all")
