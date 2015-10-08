@@ -21,6 +21,8 @@ class Observer(models.Model):
     type = models.CharField("type of observation measure", max_length=10,
                             choices=OBSERVER_TYPES,
                             default=None, null=True)
+    address = models.CharField("street address for observation points", max_length=200,
+                               default=None, null=True)
 
     def __unicode__(self):
         return self.location
