@@ -89,7 +89,7 @@ makeMap = ->
         maxBounds: getMaxBounds options.style
         layers: [tileLayer]
 
-    window.map = L.map('map', mapOptions).setView [60.179343303652864, 24.941389], 10
+    window.map = L.map('map', mapOptions).setView [60.179343303652864, 24.934389], 10
 
 create_map = ->
 
