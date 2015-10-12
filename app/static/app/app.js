@@ -62,8 +62,12 @@ $(document).ready(function() {
     $('#observators button').click(function (e) {
         SERIES.selected = e.target.value;
         console.log("selecting ", SERIES.selected);
+        $('#observators button').removeClass('active');
+        $(e.target).toggleClass('active');
         update_observator(SERIES.selected)
     });
+
+    $('button[value="'+ SERIES.selected + '"]').toggleClass('active');
 
     respond();
     create_map();

@@ -43,13 +43,12 @@ def get_data(observator, span):
     return get_observations(observator.observations.filter(moment__gt=span))
 
 def index(request):
-    selected = Observer.objects.get(id=1)
+
     data = {}
-    data['selected'] = selected.name
-    data['range'] = DEFAULT_MONTH_SPAN
     data['observators'] = {}
 
-    for obs in Observer.objects.all():
+    observers = Observer.objects.all().order_by('address')
+    for obs in observers:
         if not obs.loc_x and not obs.loc_y:
             # Empty location, not that useful for map
             continue
@@ -65,11 +64,13 @@ def index(request):
             'type': obs.type,
             'address': obs.address
         }
-
+    selected = observers[0]
+    data['selected'] = selected.name
+    data['range'] = DEFAULT_MONTH_SPAN
     data['observators'][selected.name]['observations'] = get_data(selected, "all")
 
     jsdata = json.dumps(data)
-    return render(request, "app/index.html", {'observators': Observer.objects.all().order_by('address'),
+    return render(request, "app/index.html", {'observators': observers,
                                               'observations': jsdata})
 
 DEFAULT_MONTH_SPAN = 6

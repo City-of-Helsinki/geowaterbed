@@ -41,7 +41,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     background: white;
 }
 
-#timerange_toolbar button.active {
+#timerange_toolbar button.active, #observators button.active {
     color: blue;
     font-weight: bold;
 }
