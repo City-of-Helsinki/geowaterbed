@@ -1,7 +1,7 @@
 
 var chart = null;
 
-function charter () {
+function charter (start) {
         chart = new Highcharts.Chart({
         chart: {
             renderTo: 'contained_chart',
@@ -80,6 +80,7 @@ function charter () {
             data: filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data)
         }]
     });
+    if (start) $('.mobile #container').hide();
 }
 
 

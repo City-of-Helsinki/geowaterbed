@@ -60,6 +60,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     position: relative;
     z-index: 1;
     float: none;
+    top: 3em;
 }
 
 #observators {
@@ -70,7 +71,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 .mobile #observators {
     z-index: 2;
     position: absolute;
-    top: 0;
+    top: 2em;
     left: 0;
 }
 
@@ -98,4 +99,12 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
 #observators li {
     margin: 0.3em 1em;
+}
+
+#switch_nav {
+    display: none;
+}
+
+.mobile #switch_nav {
+    display: block;
 }

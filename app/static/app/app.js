@@ -17,15 +17,16 @@ function respond() {
         var width = $(window).width() - 20;
         console.log('respond activate', height, width, retina);
         if (width < FULL_APP) {
+            window.MOBILE = true;
             $("#app").toggleClass('mobile', true).css('max-width', width);
             $("#container").css({'width': width, 'max-width' : width, 'max-height' : "100%", height: "26em"});
             $('#map').css({'height':height, 'width': width, 'max-width' : '90%', 'max-height' : '32em'});
-            $('#observators').css({'height':"26em", 'width': width, 'max-width' : '100%', 'max-height' : '32em'});
+            $('#observators').css({'height':"28em", 'width': width, 'max-width' : '100%', 'max-height' : '32em'});
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
         } else {
-
+            window.MOBILE = false;
             var top_halves_height = height / 2;
             var top_halves_width = width / 2;
 
@@ -42,9 +43,6 @@ function respond() {
 
 $(document).ready(function() {
 
-    // Draw the chart
-    charter();
-
     $('#container_mobiletoolbar button').click(function () {
         $('#container').hide();
     });
@@ -52,7 +50,7 @@ $(document).ready(function() {
     $(window).bind('resize', respond());
     $(window).resize();
 
-    $('#timerange_toolbar').click(function (e) {
+    $('#timerange_toolbar button').click(function (e) {
         console.log("setting range", e.target.value);
         SERIES.range = e.target.value;
         $('#timerange_toolbar button').removeClass('active');
@@ -71,7 +69,13 @@ $(document).ready(function() {
 
     $('button[value="'+ SERIES.selected + '"]').toggleClass('active');
 
+    // Calculate layout
     respond();
+
+    // Draw map
     create_map();
+
+    // Draw the chart
+    charter(true);
 
 });
