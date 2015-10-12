@@ -24,8 +24,10 @@
         <ul>
             {% for obs in observators %}
                 <li>
-                    {% if obs.address %}{{ obs.address }}
-                    {% else %}{{ obs.name }}{% endif %}
+                    <button value="{{ obs.name }}">
+                        {% if obs.address %}{{ obs.address }}
+                        {% else %}{{ obs.name }}{% endif %}
+                    </button>
                 </li>
             {% endfor %}
         </ul>
