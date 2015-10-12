@@ -31,7 +31,7 @@ function respond() {
         } else {
             $("#app").toggleClass('mobile', false).css('max-width', '90%');
             $("#container").css({'width': chart_orig_width, 'max-width' : '90%', 'max-height' : '30em'});
-            $('#map').css({'width': chart_orig_width, 'max-width' : '90%', 'max-height' : '25em'});
+            $('#map').css({'height':height, 'width': chart_orig_width, 'max-width' : '90%', 'max-height' : '25em'});
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
@@ -45,7 +45,7 @@ $(document).ready(function() {
     charter();
 
     $('#container_mobiletoolbar button').click(function () {
-        $('#contained_chart').hide();
+        $('#container').hide();
     });
 
     $(window).bind('resize', respond());
@@ -58,5 +58,8 @@ $(document).ready(function() {
         $(e.target).toggleClass('active');
         update_observator(SERIES.selected)
     });
+
+    respond();
+    create_map();
 
 });

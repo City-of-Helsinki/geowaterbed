@@ -91,28 +91,30 @@ makeMap = ->
 
     window.map = L.map('map', mapOptions).setView [60.171944, 24.941389], 10
 
-makeMap()
+create_map = ->
+
+    makeMap()
+
+    makeMark = (data) ->
+        markers = {}
+        markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
+            'title': data.title,
+            riseOnHover: true}
+        ).addTo(map);
+        markers[data.title].bindPopup(data.content);
+        markers[data.title].on 'click', (ev) ->
+            update_observator(data.title)
+            $('#container').show()
 
 
-makeMark = (data) ->
-    markers = {}
-    markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
-        'title' : data.title,
-        riseOnHover: true}
-    ).addTo(map);
-    markers[data.title].bindPopup(data.content);
-    markers[data.title].on 'click', (ev) ->
-        update_observator(data.title)
-        $('#contained_chart').show()
+    makeMarks = () ->
+        for id, obs of SERIES.observators
+            makeMark
+                x: obs.location.x
+                y: obs.location.y
+                title: obs.name
+                content: "Keskiarvo " + obs.avg
 
+    makeMarks()
 
-makeMarks = () ->
-    for id, obs of SERIES.observators
-        makeMark
-            x: obs.location.x
-            y: obs.location.y
-            title: obs.name
-            content: "Keskiarvo " + obs.avg
-
-
-makeMarks()
+window.create_map = create_map

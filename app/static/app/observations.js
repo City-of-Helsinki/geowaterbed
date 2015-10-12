@@ -4,7 +4,7 @@ var chart = null;
 function charter () {
         chart = new Highcharts.Chart({
         chart: {
-            renderTo: 'container',
+            renderTo: 'contained_chart',
             zoomType: 'x'
         },
         title: {
