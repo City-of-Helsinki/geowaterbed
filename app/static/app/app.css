@@ -1,4 +1,9 @@
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 ul {
     margin: 0 1em;
     padding: 0 1em;
@@ -47,4 +52,25 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
 #observators {
     overflow: scroll;
+}
+
+#logo {
+    height: 2em;
+}
+
+#header h1, #header img {
+    display: inline;
+    font-family: ff-karbid-web-pro,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    vertical-align: middle;
+    color: white;
+}
+
+#header {
+    background-color: #35455F;
+    margin: 0;
+    padding: 10px;
+}
+
+#app {
+    padding: 10px;
 }
