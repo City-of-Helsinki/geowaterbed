@@ -59,6 +59,12 @@ $(document).ready(function() {
         update_observator(SERIES.selected)
     });
 
+    $('#observators button').click(function (e) {
+        SERIES.selected = e.target.value;
+        console.log("selecting ", SERIES.selected);
+        update_observator(SERIES.selected)
+    });
+
     respond();
     create_map();
 
