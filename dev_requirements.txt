@@ -2,3 +2,5 @@
 livereload
 django-extensions
 django-debug-toolbar
+gnureadline
+ipython

@@ -2,8 +2,6 @@ Django<1.9
 django-filters==0.1.0
 django-rest-swagger==0.2.9
 djangorestframework==3.1.1
-gnureadline==6.3.3
-ipython==3.1.0
 Markdown==2.6.2
 psycopg2==2.6.1
 PyYAML==3.11
