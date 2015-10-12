@@ -89,7 +89,7 @@
       maxBounds: getMaxBounds(options.style),
       layers: [tileLayer]
     };
-    return window.map = L.map('map', mapOptions).setView([60.171944, 24.941389], 10);
+    return window.map = L.map('map', mapOptions).setView([60.179343303652864, 24.941389], 10);
   };
 
   create_map = function() {
@@ -104,6 +104,7 @@
       }).addTo(map);
       markers[data.title].bindPopup(data.content);
       return markers[data.title].on('click', function(ev) {
+        console.log(data);
         update_observator(data.title);
         return $('#container').show();
       });

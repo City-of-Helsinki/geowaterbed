@@ -89,7 +89,7 @@ makeMap = ->
         maxBounds: getMaxBounds options.style
         layers: [tileLayer]
 
-    window.map = L.map('map', mapOptions).setView [60.171944, 24.941389], 10
+    window.map = L.map('map', mapOptions).setView [60.179343303652864, 24.941389], 10
 
 create_map = ->
 
@@ -103,6 +103,7 @@ create_map = ->
         ).addTo(map);
         markers[data.title].bindPopup(data.content);
         markers[data.title].on 'click', (ev) ->
+            console.log(data)
             update_observator(data.title)
             $('#container').show()
 
