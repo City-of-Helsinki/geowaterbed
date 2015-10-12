@@ -128,3 +128,7 @@ except ImportError as e:
     if "local_settings" not in str(e):
         raise e
 
+if DEBUG:
+    INSTALLED_APPS += (
+    'livereload',
+)
