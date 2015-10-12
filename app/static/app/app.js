@@ -29,8 +29,8 @@ function respond() {
             var top_halves_width = width / 2;
 
             $("#app").toggleClass('mobile', false).css('max-width', '90%');
-            $("#container").css({'width': width, 'max-width' : '90%', 'max-height' : '30em'});
-            $('#map').css({'height':height, 'width': width, 'max-width' : '40%', 'max-height' : '32em'});
+            $("#container").css({'width': width, 'max-width' : '100%', 'max-height' : '30em'});
+            $('#map').css({'height':height, 'width': width, 'max-width' : '60%', 'max-height' : '32em'});
             $('#observators').css({'height':"24em", 'width': width, 'max-width' : '40%', 'max-height' : '32em'});
             window.requestAnimationFrame(function () {
                chart_reflow();

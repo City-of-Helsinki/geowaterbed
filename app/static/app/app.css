@@ -1,4 +1,13 @@
 
+ul {
+    margin: 0 1em;
+    padding: 0 1em;
+}
+
+li {
+    list-style-type: none;
+}
+
 h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
 #container_mobiletoolbar {
