@@ -29,9 +29,9 @@ function respond() {
                chart_reflow();
             });
         } else {
-            $("#app").toggleClass('mobile', false).css('max-width', 'auto');
-            $("#container").css({'width': chart_orig_width, 'max-width' : 'auto', 'max-height' : 'auto'});
-            $('#map').css({'width': chart_orig_width, 'max-width' : 'auto'});
+            $("#app").toggleClass('mobile', false).css('max-width', '90%');
+            $("#container").css({'width': chart_orig_width, 'max-width' : '90%', 'max-height' : '30em'});
+            $('#map').css({'width': chart_orig_width, 'max-width' : '90%', 'max-height' : '25em'});
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
@@ -52,7 +52,7 @@ $(document).ready(function() {
     $(window).resize();
 
     $('#timerange_toolbar').click(function (e) {
-        console.log("setting range", e.target.value, e);
+        console.log("setting range", e.target.value);
         SERIES.range = e.target.value;
         $('#timerange_toolbar button').removeClass('active');
         $(e.target).toggleClass('active');
