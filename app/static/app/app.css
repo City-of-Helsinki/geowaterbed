@@ -47,7 +47,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     background: white;
 }
 
-#timerange_toolbar button.active, #observators button.active {
+#timerange_toolbar button.active, #observators button.active, #switch_nav button.active {
     color: blue;
     font-weight: bold;
 }
@@ -73,6 +73,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     position: absolute;
     top: 2em;
     left: 0;
+    display: none;
 }
 
 #logo {
@@ -99,6 +100,11 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
 #observators li {
     margin: 0.3em 1em;
+}
+
+#observators button {
+    width: 80%;
+    line-height: 150%;
 }
 
 #switch_nav {

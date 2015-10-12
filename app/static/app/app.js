@@ -67,6 +67,22 @@ $(document).ready(function() {
         $('#container').show();
     });
 
+    $('#switch_nav button').click(function (e) {
+        switch (e.target.value) {
+            case "map":
+                $('#observators').hide();
+                $('button[value="map"]').toggleClass('active');
+                $('button[value="observators"]').toggleClass('active');
+                break;
+            case "observators":
+                $('#observators').show();
+                $('button[value="map"]').toggleClass('active');
+                $('button[value="observators"]').toggleClass('active');
+                break;
+       }
+    });
+
+    $('button[value="map"]').toggleClass('active');
     $('button[value="'+ SERIES.selected + '"]').toggleClass('active');
 
     // Calculate layout
