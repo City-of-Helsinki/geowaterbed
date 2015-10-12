@@ -19,6 +19,10 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     position: relative;
 }
 
+#container {
+    background: white;
+}
+
 #container_mobiletoolbar {
     display: none;
 }
@@ -34,20 +38,20 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     position: absolute;
     top: 0;
     left: 0;
+    padding-bottom: 2em;
 }
 
 .mobile #container_mobiletoolbar {
     text-align: right;
-    background: white;
     display: block;
-    margin-right: 2em;
+    margin-right: 1em;
 }
 
 #timerange_toolbar {
     background: white;
 }
 
-#timerange_toolbar button.active, #observators button.active, #switch_nav button.active {
+#timerange_toolbar button.active, #observators button.active, #switch_nav button.active, .mobile #container_mobiletoolbar button {
     color: blue;
     font-weight: bold;
 }

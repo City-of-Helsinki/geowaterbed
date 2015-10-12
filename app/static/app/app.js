@@ -19,7 +19,7 @@ function respond() {
         if (width < FULL_APP) {
             window.MOBILE = true;
             $("#app").toggleClass('mobile', true).css('max-width', width);
-            $("#container").css({'width': width, 'max-width' : width, 'max-height' : "100%", height: "26em"});
+            $("#container").css({'width': width, 'max-width' : width, 'max-height' : "100%", height: "35em"});
             $('#map').css({'height':height, 'width': width, 'max-width' : '90%', 'max-height' : '32em'});
             $('#observators').css({'height':"28em", 'width': width, 'max-width' : '100%', 'max-height' : '32em'});
             window.requestAnimationFrame(function () {
