@@ -15,17 +15,22 @@ li {
 
 h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
+#app {
+    position: relative;
+}
+
 #container_mobiletoolbar {
     display: none;
 }
 
-#container_chart {
+#contained_chart {
     /*width:35em; height: 25em;*/
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
 }
 
-.mobile #contained_chart {
-    z-index: 2;
+.mobile #container {
+    z-index: 3;
     position: absolute;
     top: 0;
     left: 0;
@@ -35,6 +40,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     text-align: right;
     background: white;
     display: block;
+    margin-right: 2em;
 }
 
 #timerange_toolbar {
@@ -50,8 +56,22 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     float: left;
 }
 
+.mobile #map {
+    position: relative;
+    z-index: 1;
+    float: none;
+}
+
 #observators {
     overflow: scroll;
+    background-color: white;
+}
+
+.mobile #observators {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #logo {
@@ -63,6 +83,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
     font-family: ff-karbid-web-pro,"Helvetica Neue",Helvetica,Arial,sans-serif;
     vertical-align: middle;
     color: white;
+    margin: 1em ;
 }
 
 #header {

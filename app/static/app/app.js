@@ -18,8 +18,9 @@ function respond() {
         console.log('respond activate', height, width, retina);
         if (width < FULL_APP) {
             $("#app").toggleClass('mobile', true).css('max-width', width);
-            $("#container").css({'width': width, 'max-width' : width, 'max-height' : map_orig_height, height: map_orig_height});
-            $('#map').css('max-width', width);
+            $("#container").css({'width': width, 'max-width' : width, 'max-height' : "100%", height: "26em"});
+            $('#map').css({'height':height, 'width': width, 'max-width' : '90%', 'max-height' : '32em'});
+            $('#observators').css({'height':"26em", 'width': width, 'max-width' : '100%', 'max-height' : '32em'});
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
@@ -64,7 +65,8 @@ $(document).ready(function() {
         console.log("selecting ", SERIES.selected);
         $('#observators button').removeClass('active');
         $(e.target).toggleClass('active');
-        update_observator(SERIES.selected)
+        update_observator(SERIES.selected);
+        $('#container').show();
     });
 
     $('button[value="'+ SERIES.selected + '"]').toggleClass('active');
