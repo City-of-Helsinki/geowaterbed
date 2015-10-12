@@ -1,11 +1,6 @@
 
 h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 
-#contained_chart {
-    clear: both;
-    /*position: relative;*/
-}
-
 #container_mobiletoolbar {
     display: none;
 }
@@ -35,4 +30,12 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 #timerange_toolbar button.active {
     color: blue;
     font-weight: bold;
+}
+
+#map {
+    float: left;
+}
+
+#observators {
+    overflow: scroll;
 }

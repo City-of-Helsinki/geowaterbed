@@ -69,7 +69,7 @@ def index(request):
     data['observators'][selected.name]['observations'] = get_data(selected, "all")
 
     jsdata = json.dumps(data)
-    return render(request, "app/index.html", {'queryset': Observer.objects.all(),
+    return render(request, "app/index.html", {'observators': Observer.objects.all().order_by('address'),
                                               'observations': jsdata})
 
 DEFAULT_MONTH_SPAN = 6

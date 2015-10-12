@@ -13,7 +13,7 @@ function respond() {
     var retina = isRetinaDisplay();
 
     return function () {
-        var height = $(window).height();
+        var height = $(window).height() - 20;
         var width = $(window).width() - 20;
         console.log('respond activate', height, width, retina);
         if (width < FULL_APP) {
@@ -24,9 +24,14 @@ function respond() {
                chart_reflow();
             });
         } else {
+
+            var top_halves_height = height / 2;
+            var top_halves_width = width / 2;
+
             $("#app").toggleClass('mobile', false).css('max-width', '90%');
             $("#container").css({'width': width, 'max-width' : '90%', 'max-height' : '30em'});
-            $('#map').css({'height':height, 'width': width, 'max-width' : '90%', 'max-height' : '32em'});
+            $('#map').css({'height':height, 'width': width, 'max-width' : '40%', 'max-height' : '32em'});
+            $('#observators').css({'height':"24em", 'width': width, 'max-width' : '40%', 'max-height' : '32em'});
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
