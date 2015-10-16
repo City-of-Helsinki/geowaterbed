@@ -91,12 +91,14 @@ makeMap = ->
 
     window.map = L.map('map', mapOptions).setView [60.179343303652864, 24.934389], 10
 
+window.markers = {}
+
 create_map = ->
 
     makeMap()
 
     makeMark = (data) ->
-        markers = {}
+        markers = window.markers
         markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
             'title': data.title,
             riseOnHover: true}
@@ -118,4 +120,10 @@ create_map = ->
 
     makeMarks()
 
+center_marker = (mark_id) ->
+    marker = window.markers[mark_id]
+    cM = map.project(marker._latlng);
+    map.setView(map.unproject(cM), 11, {animate: true});
+
 window.create_map = create_map
+window.center_marker = center_marker

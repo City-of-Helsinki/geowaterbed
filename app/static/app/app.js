@@ -64,6 +64,7 @@ $(document).ready(function() {
         $('#observators button').removeClass('active');
         $(e.target).toggleClass('active');
         update_observator(SERIES.selected);
+        center_marker(SERIES.selected);
         $('#container').show();
     });
 
