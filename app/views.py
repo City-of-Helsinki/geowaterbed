@@ -87,5 +87,5 @@ def detail(request, name, span=None):
         except ValueError:
             return HttpResponseBadRequest('Value of span must be all or integer less than 50')
     selected = get_object_or_404(Observer, name=name)
-    data = get_data(selected, span)
+    data = get_data(selected, "all")
     return JsonResponse(data)

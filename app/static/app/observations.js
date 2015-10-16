@@ -81,6 +81,7 @@ function charter (start) {
         }]
     });
     if (start) $('.mobile #container').hide();
+    if (start) update_plotlines();
 }
 
 
