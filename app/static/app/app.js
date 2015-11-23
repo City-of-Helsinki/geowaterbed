@@ -1,5 +1,6 @@
 
-var FULL_APP = '620';
+var FULL_APP_WIDTH = '620';
+var FULL_APP_HEIGTH = '620';
 
 function isRetinaDisplay() {
     if (window.matchMedia) {
@@ -15,8 +16,8 @@ function respond() {
     return function () {
         var height = $(window).height() - 20;
         var width = $(window).width() - 20;
-        console.log('respond activate', height, width, retina);
-        if (width < FULL_APP) {
+        console.log('respond activate', height / 2, width / 2, retina);
+        if (width < FULL_APP_WIDTH || height < FULL_APP_HEIGTH) {
             window.MOBILE = true;
             $("#app").toggleClass('mobile', true).css('max-width', width);
             $("#container").css({'width': width, 'max-width' : width, 'max-height' : "100%", height: "35em"});
@@ -27,13 +28,13 @@ function respond() {
             });
         } else {
             window.MOBILE = false;
-            var top_halves_height = height / 2;
+            var top_halves_height = height / 2 - 200;
             var top_halves_width = width / 2;
 
             $("#app").toggleClass('mobile', false).css('max-width', '90%');
-            $("#container").css({'width': width, 'max-width' : '100%', 'max-height' : '30em'});
-            $('#map').css({'height':height, 'width': width, 'max-width' : '60%', 'max-height' : '32em'});
-            $('#observators').css({'height':"24em", 'width': width, 'max-width' : '40%', 'max-height' : '32em'});
+            $("#container").css({'width': width, 'max-width' : '100%', 'max-height' : top_halves_height + 'px'});
+            $('#map').css({'height':'26em', 'width': width, 'max-width' : '60%', 'max-height' : top_halves_height + 'px'});
+            $('#observators').css({'height':"24em", 'width': width, 'max-width' : '40%', 'max-height' : top_halves_height + 'px'});
             window.requestAnimationFrame(function () {
                chart_reflow();
             });
