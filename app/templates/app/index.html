@@ -12,6 +12,9 @@
     <script src="{% static 'app/proj4leaflet.js'%}"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <link rel="stylesheet" href="{% static 'app/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/leaftlet_extra_markers/css/leaflet.extra-markers.min.css' %}">
+    <script src="{% static 'app/leaftlet_extra_markers/js/leaflet.extra-markers.min.js'%}"></script>
     <script>
         var SERIES = {{ observations|safe }};
     </script>

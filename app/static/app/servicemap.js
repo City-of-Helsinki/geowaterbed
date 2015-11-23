@@ -98,20 +98,31 @@
     var makeMark, makeMarks;
     makeMap();
     makeMark = function(data) {
-      var markers, redMarker;
+      var blueMarker, markers, redMarker;
       markers = window.markers;
-      redMarker = L.ExtraMarkers.icon({
+      blueMarker = L.ExtraMarkers.icon({
         icon: 'fa-map-marker',
         markerColor: 'blue',
+        prefix: 'fa'
+      });
+      redMarker = L.ExtraMarkers.icon({
+        icon: 'fa-map-marker',
+        markerColor: 'red',
         prefix: 'fa'
       });
       markers[data.title] = L.marker([data.x, data.y], {
         'title': data.title,
         riseOnHover: true,
-        icon: redMarker
+        icon: blueMarker
       }).addTo(map);
       markers[data.title].bindPopup(data.content);
       return markers[data.title].on('click', function(ev) {
+        var key, marker;
+        for (key in markers) {
+          marker = markers[key];
+          marker.setIcon(blueMarker);
+        }
+        markers[data.title].setIcon(redMarker);
         console.log(data);
         update_observator(data.title);
         return $('#container').show();

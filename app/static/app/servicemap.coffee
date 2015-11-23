@@ -100,18 +100,32 @@ create_map = ->
     makeMark = (data) ->
         markers = window.markers
 
-        redMarker = L.ExtraMarkers.icon({
+        blueMarker = L.ExtraMarkers.icon({
             icon: 'fa-map-marker',
             markerColor: 'blue',
+            prefix: 'fa'})
+
+        redMarker = L.ExtraMarkers.icon({
+            icon: 'fa-map-marker',
+            markerColor: 'red',
             prefix: 'fa'})
 
         markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
             'title': data.title,
             riseOnHover: true,
-            icon: redMarker}
+            icon: blueMarker}
         ).addTo(map);
+
         markers[data.title].bindPopup(data.content);
         markers[data.title].on 'click', (ev) ->
+
+            # New selection coming, all markers to unselected color
+            for key, marker of markers
+                marker.setIcon(blueMarker)
+
+            # Newly selected marker to selection color
+            markers[data.title].setIcon(redMarker)
+
             console.log(data)
             update_observator(data.title)
             $('#container').show()
