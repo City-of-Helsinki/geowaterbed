@@ -98,11 +98,17 @@
     var makeMark, makeMarks;
     makeMap();
     makeMark = function(data) {
-      var markers;
+      var markers, redMarker;
       markers = window.markers;
+      redMarker = L.ExtraMarkers.icon({
+        icon: 'fa-map-marker',
+        markerColor: 'blue',
+        prefix: 'fa'
+      });
       markers[data.title] = L.marker([data.x, data.y], {
         'title': data.title,
-        riseOnHover: true
+        riseOnHover: true,
+        icon: redMarker
       }).addTo(map);
       markers[data.title].bindPopup(data.content);
       return markers[data.title].on('click', function(ev) {

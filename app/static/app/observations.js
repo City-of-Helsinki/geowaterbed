@@ -107,7 +107,7 @@ function update_plotlines() {
             });
         }
     });
-    $('#observators_amount').text('Havaintojen määrä (kaikki havainnot):' + SERIES.observators[SERIES.selected].selected_amount +
+    $('#observators_amount').text('Havaintojen määrä (kaikki havainnot): ' + SERIES.observators[SERIES.selected].selected_amount +
         ' (' + SERIES.observators[SERIES.selected].observations.data.length + ')')
 }
 

@@ -99,9 +99,16 @@ create_map = ->
 
     makeMark = (data) ->
         markers = window.markers
+
+        redMarker = L.ExtraMarkers.icon({
+            icon: 'fa-map-marker',
+            markerColor: 'blue',
+            prefix: 'fa'})
+
         markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
             'title': data.title,
-            riseOnHover: true}
+            riseOnHover: true,
+            icon: redMarker}
         ).addTo(map);
         markers[data.title].bindPopup(data.content);
         markers[data.title].on 'click', (ev) ->
