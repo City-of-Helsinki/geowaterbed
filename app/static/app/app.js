@@ -52,7 +52,6 @@ $(document).ready(function() {
     $(window).resize();
 
     $('#timerange_toolbar button').click(function (e) {
-        console.log("setting range", e.target.value);
         SERIES.range = e.target.value;
         $('#timerange_toolbar button').removeClass('active');
         $(e.target).toggleClass('active');
@@ -61,7 +60,6 @@ $(document).ready(function() {
 
     $('#observators button').click(function (e) {
         SERIES.selected = e.target.value;
-        console.log("selecting ", SERIES.selected);
         $('#observators button').removeClass('active');
         $(e.target).toggleClass('active');
         update_observator(SERIES.selected);

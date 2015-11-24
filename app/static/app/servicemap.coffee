@@ -91,6 +91,16 @@ makeMap = ->
 
     window.map = L.map('map', mapOptions).setView [60.179343303652864, 24.934389], 10
 
+blue_icon = L.ExtraMarkers.icon({
+            icon: 'fa-map-marker',
+            markerColor: 'blue',
+            prefix: 'fa'})
+
+red_icon = L.ExtraMarkers.icon({
+    icon: 'fa-map-marker',
+    markerColor: 'red',
+    prefix: 'fa'})
+
 window.markers = {}
 
 create_map = ->
@@ -99,50 +109,42 @@ create_map = ->
 
     makeMark = (data) ->
         markers = window.markers
-
-        blueMarker = L.ExtraMarkers.icon({
-            icon: 'fa-map-marker',
-            markerColor: 'blue',
-            prefix: 'fa'})
-
-        redMarker = L.ExtraMarkers.icon({
-            icon: 'fa-map-marker',
-            markerColor: 'red',
-            prefix: 'fa'})
-
         markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
             'title': data.title,
             riseOnHover: true,
-            icon: blueMarker}
+            icon: if data.selected then red_icon else blue_icon}
         ).addTo(map);
 
         markers[data.title].bindPopup(data.content);
         markers[data.title].on 'click', (ev) ->
 
-            # New selection coming, all markers to unselected color
-            for key, marker of markers
-                marker.setIcon(blueMarker)
-
-            # Newly selected marker to selection color
-            markers[data.title].setIcon(redMarker)
-
-            console.log(data)
+            update_markers(data.title)
             update_observator(data.title)
             $('#container').show()
 
-
     makeMarks = () ->
         for id, obs of SERIES.observators
+            selected = SERIES.selected == obs.name
             makeMark
                 x: obs.location.x
                 y: obs.location.y
                 title: obs.name
                 content: "Keskiarvo " + obs.avg
-
+                selected: selected
     makeMarks()
 
-center_marker = (mark_id) ->
-    marker = window.markers[mark_id]
+update_markers = (marker_id) ->
+    markers = window.markers
+    # New selection coming, all markers to unselected color
+    for key, marker of markers
+        marker.setIcon(blue_icon)
+
+    # Newly selected marker to selection color
+    markers[marker_id].setIcon(red_icon)
+
+center_marker = (marker_id) ->
+    marker = window.markers[marker_id]
+    update_markers(marker_id)
     cM = map.project(marker._latlng);
     map.setView(map.unproject(cM), 11, {animate: true});
 
