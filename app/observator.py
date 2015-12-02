@@ -6,6 +6,7 @@ import requests
 from .models import Observer, Observations
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.db.models import ObjectDoesNotExist
 
 from collections import namedtuple
 
@@ -13,26 +14,76 @@ Measurement = namedtuple('Measurement', ['moment', 'measurement'])
 
 
 def import_data():
+    """
+    Import data into database according to datasource_path in Observer objects
+    and DATA_IMPORT_BASEURL from settings
+
+    :return: None
+    """
 
     location = getattr(settings, "DATA_IMPORT_BASEURL", None)
     if not location:
         raise ImproperlyConfigured("Data import needs DATA_IMPORT_BASEURL in settings")
-    
-    for obs in Observer.objetcs.all():
-        pass
-    
+
+    for obs in Observer.objects.all():
+        try:
+            r = requests.get(location + obs.datasource_path)
+        except requests.exceptions.ConnectionError, e:
+            print obs.datasource_path, e
+            return False
+        except requests.exceptions.Timeout, e:
+            print obs.datasource_path, e
+            return False
+
+        data = process(r.content)
+        save_obs(obs, data)
+
+
+def save_obs(obs, data):
+
+    obs.location = data['PISTE']
+    obs.min = data['MIN']
+    obs.max = data['MAX']
+    obs.avg = data['KESKI']
+    obs.halymin = data.get('HALYMIN', None)
+    obs.halymax = data.get('HALYMAX', None)
+
+    obs.save()
+
+    try:
+        point = obs.observations.latest('moment')
+        latest = point.moment
+    except ObjectDoesNotExist:
+        latest = datetime.date.min
+
+    for point in data['observations']:
+        if latest < point.moment:
+            dobs = Observations(
+                moment=point.moment,
+                measurement=point.measurement,
+                observer=obs)
+            dobs.save()
+
 
 def process(doc):
+    """
+    Process data file into dictionary containing its fields
+    and observations as Measurement
+    :param doc: str
+    :return: dict
+    """
+
     resp = {"observations": []}
     lines = doc.splitlines()
-    first, second = lines.strip().split(" ")
     for l in lines:
+        first, second = l.strip().split(" ")
         if first.isalpha():
             resp[first] = second
         else:
             try:
                 dt = datetime.datetime.strptime(first, '%d.%m.%Y')
-                meas = Measurement(dt, second)
+                d = dt.date()
+                meas = Measurement(d, second)
                 resp["observations"].append(meas)
             except ValueError, e:
                 print "Datetime conversion error", doc, first
@@ -50,7 +101,8 @@ def read(docs):
             else:
                 try:
                     dt = datetime.datetime.strptime(first, '%d.%m.%Y')
-                    meas = Measurement(dt, second)
+                    d = dt.date()
+                    meas = Measurement(d, second)
                     data[doc]["observations"].append(meas)
                 except ValueError, e:
                     print "Datetime conversion error", doc, first
@@ -73,6 +125,12 @@ def save(data):
                 measurement=obs.measurement,
                 observer=d)
             dobs.save()
+
+
+def get_coords(doc):
+    coord_lines = open(doc).read().splitlines()
+    coords = coordinator(coord_lines)
+    update_coord(coords)
 
 
 def coordinator(point_lines):
@@ -116,6 +174,7 @@ def update_addresses(addrs):
         try:
             obj = Observer.objects.get(name=name.lower() + '.txt')
         except:
+            print name
             pass
 
         obj.address = addr
