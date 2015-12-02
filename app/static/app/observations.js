@@ -13,10 +13,15 @@ function get_title(obs) {
         default:
             title = "Veden korkeus ja normaalitaso";
     }
+
+    moment.locale('fi');
+    title = title + ' ' + moment(obs.first).format('l') + ' - ' + moment(obs.last).format('l');
+
     return title;
 }
 
 function charter (start) {
+        var filtered = filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data);
         chart = new Highcharts.Chart({
         chart: {
             renderTo: 'contained_chart',
@@ -92,7 +97,7 @@ function charter (start) {
         series: [{
             type: 'area',
             name: 'Pohjaveden korkeus',
-            data: filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data)
+            data: filtered
         }]
     });
     if (start) $('.mobile #container').hide();
@@ -130,15 +135,15 @@ function update_plotlines() {
 function update_observator(key) {
     if (SERIES.observators[key].observations) {
         SERIES.selected = key;
-        chart.setTitle({text: get_title(SERIES.observators[SERIES.selected])});
         chart.series[0].setData(filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data));
+        chart.setTitle({text: get_title(SERIES.observators[SERIES.selected])});
         update_plotlines()
     } else {
         $.getJSON('data/' + key, function (resp, status) {
             SERIES.observators[key].observations = resp;
             SERIES.selected = key;
-            chart.setTitle({text: get_title(SERIES.observators[SERIES.selected])});
             chart.series[0].setData(filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data));
+            chart.setTitle({text: get_title(SERIES.observators[SERIES.selected])});
             update_plotlines()
         })
     }
@@ -161,6 +166,8 @@ function filter_data(range, data) {
             filtered.push(datum)
         }
     }
+    SERIES.observators[SERIES.selected].first = filtered[0][0];
+    SERIES.observators[SERIES.selected].last = filtered[filtered.length - 1][0];
     SERIES.observators[SERIES.selected].selected_amount = filtered.length;
     return filtered;
 }
