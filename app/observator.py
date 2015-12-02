@@ -175,9 +175,14 @@ def update_addresses(addrs):
             obj = Observer.objects.get(name=name.lower() + '.txt')
         except:
             print name
-            pass
+            continue
 
         obj.address = addr
+        if obj.address.startswith('Orsi'):
+            obj.type = 'orsi'
+        elif obj.address.startswith('Pohja'):
+            obj.type = 'pohja'
+
         obj.save()
 
 

@@ -1,6 +1,21 @@
 
 var chart = null;
 
+function get_title(obs) {
+    var title;
+    switch (obs.type) {
+        case 'pohja':
+            title = "Pohjaveden korkeus ja normaalitaso";
+            break;
+        case 'orsi':
+            title = "Orsiveden korkeus ja normaalitaso";
+            break;
+        default:
+            title = "Veden korkeus ja normaalitaso";
+    }
+    return title;
+}
+
 function charter (start) {
         chart = new Highcharts.Chart({
         chart: {
@@ -8,7 +23,7 @@ function charter (start) {
             zoomType: 'x'
         },
         title: {
-            text: 'Pohjaveden korkeus ja normaalitaso'
+            text: get_title(SERIES.observators[SERIES.selected])
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -115,12 +130,14 @@ function update_plotlines() {
 function update_observator(key) {
     if (SERIES.observators[key].observations) {
         SERIES.selected = key;
+        chart.setTitle({text: get_title(SERIES.observators[SERIES.selected])});
         chart.series[0].setData(filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data));
         update_plotlines()
     } else {
         $.getJSON('data/' + key, function (resp, status) {
             SERIES.observators[key].observations = resp;
             SERIES.selected = key;
+            chart.setTitle({text: get_title(SERIES.observators[SERIES.selected])});
             chart.series[0].setData(filter_data(SERIES.range, SERIES.observators[SERIES.selected].observations.data));
             update_plotlines()
         })
