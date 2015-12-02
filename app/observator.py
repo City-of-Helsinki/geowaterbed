@@ -1,12 +1,42 @@
 # -*- coding: utf-8 -*-
 
 import datetime, re
+import requests
 
 from .models import Observer, Observations
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 from collections import namedtuple
 
 Measurement = namedtuple('Measurement', ['moment', 'measurement'])
+
+
+def import_data():
+
+    location = getattr(settings, "DATA_IMPORT_BASEURL", None)
+    if not location:
+        raise ImproperlyConfigured("Data import needs DATA_IMPORT_BASEURL in settings")
+    
+    for obs in Observer.objetcs.all():
+        pass
+    
+
+def process(doc):
+    resp = {"observations": []}
+    lines = doc.splitlines()
+    first, second = lines.strip().split(" ")
+    for l in lines:
+        if first.isalpha():
+            resp[first] = second
+        else:
+            try:
+                dt = datetime.datetime.strptime(first, '%d.%m.%Y')
+                meas = Measurement(dt, second)
+                resp["observations"].append(meas)
+            except ValueError, e:
+                print "Datetime conversion error", doc, first
+    return resp
 
 
 def read(docs):
