@@ -110,12 +110,11 @@ create_map = ->
     makeMark = (data) ->
         markers = window.markers
         markers[data.title] = L.marker([data.x, data.y], { #60.171855296861, 24.9424839040419
-            'title': data.title,
+            'title': data.address,
             riseOnHover: true,
             icon: if data.selected then red_icon else blue_icon}
         ).addTo(map);
 
-        markers[data.title].bindPopup(data.content);
         markers[data.title].on 'click', (ev) ->
 
             update_markers(data.title)
@@ -131,6 +130,7 @@ create_map = ->
                 title: obs.name
                 content: "Keskiarvo " + obs.avg
                 selected: selected
+                address: obs.address
     makeMarks()
 
 update_markers = (marker_id) ->

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponseBadRequest
+from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 
@@ -8,6 +9,7 @@ from rest_framework import viewsets
 from .models import Observer
 from .serializers import ObserverSerializer
 import json, time
+
 
 class ObserverViewSet(viewsets.ModelViewSet):
     """
@@ -29,6 +31,7 @@ def get_observations(queryset):
             ]
     }
 
+
 def get_data(observator, span):
 
     if span == 'all':
@@ -42,10 +45,10 @@ def get_data(observator, span):
 
     return get_observations(observator.observations.filter(moment__gt=span))
 
+
 def index(request):
 
-    data = {}
-    data['observators'] = {}
+    data = {'observators': {}}
 
     observers = Observer.objects.all().order_by('address')
     for obs in observers:
@@ -75,8 +78,6 @@ def index(request):
 
 DEFAULT_MONTH_SPAN = 6
 
-import datetime
-from dateutil.relativedelta import relativedelta
 
 def detail(request, name, span=None):
     if span and span is not 'all':
