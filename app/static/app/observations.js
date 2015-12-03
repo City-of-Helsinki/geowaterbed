@@ -107,8 +107,8 @@ function charter (start) {
 
 var LINES = [
     {id : 'avg', 'title': 'keskiarvo', color: 'blue'},
-    {id : 'min', title: 'minimi', color: '#ff0000'},
-    {id : 'max', title: 'maksimi', color: '#ff0000'},
+    //{id : 'min', title: 'minimi', color: '#ff0000'},
+    //{id : 'max', title: 'maksimi', color: '#ff0000'},
     {id : 'halymin', title: 'huomiorajaminimi', color: 'red'},
     {id : 'halymax', title: 'huomiorajamaksimi', color: 'red'}
 ];
