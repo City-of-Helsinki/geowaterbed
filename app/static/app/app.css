@@ -118,3 +118,7 @@ h1 { font-family: "Comic Sans MS", "Comic Sans", cursive; }
 .mobile #switch_nav {
     display: block;
 }
+
+#observators_amount {
+    margin: 1em;
+}

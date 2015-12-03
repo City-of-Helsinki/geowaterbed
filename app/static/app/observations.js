@@ -114,11 +114,12 @@ var LINES = [
 ];
 
 function update_plotlines() {
+    var obs = SERIES.observators[SERIES.selected];
     LINES.forEach(function (line) {
         chart.yAxis[0].removePlotLine(line.id);
-        if (SERIES.observators[SERIES.selected][line.id]) {
+        if (obs[line.id]) {
             chart.yAxis[0].addPlotLine({
-                value: SERIES.observators[SERIES.selected][line.id],
+                value: obs[line.id],
                 color: line.color,
                 width: 2,
                 zIndex: 4,
@@ -127,8 +128,9 @@ function update_plotlines() {
             });
         }
     });
-    $('#observators_amount').text('Havaintojen määrä (kaikki havainnot): ' + SERIES.observators[SERIES.selected].selected_amount +
-        ' (' + SERIES.observators[SERIES.selected].observations.data.length + ')')
+    $('#observators_amount').html('<span>Havaintojen määrä (kaikki havainnot): ' + obs.selected_amount +
+        ' (' + obs.observations.data.length + ') </span> <br>' +
+        ' <span> Veden korkeuden keskiarvo: ' + obs.avg + '</span> </div>')
 }
 
 
