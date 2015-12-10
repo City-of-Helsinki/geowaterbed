@@ -42,32 +42,7 @@ function charter (start) {
         yAxis: {
             title: {
                 text: 'Pohjaveden korkeus'
-            },
-            plotLines:[{
-                    value: SERIES.observators[SERIES.selected].avg,
-                    color: 'blue',
-                    width: 2,
-                    zIndex: 4,
-                    label: {text: 'keskiarvo'},
-                    id: 'avg'
-                },
-            {
-                    value: SERIES.observators[SERIES.selected].min,
-                    color: '#ff0000',
-                    width: 2,
-                    zIndex: 5,
-                    label: {text: 'minimi'},
-                    id: 'min'
-                },
-            {
-                    value: SERIES.observators[SERIES.selected].max,
-                    color: '#ff0000',
-                    width: 2,
-                    zIndex: 6,
-                    label: {text: 'max'},
-                    id: 'max'
-                }]
-
+            }
         },
         legend: {
             enabled: false
@@ -106,11 +81,9 @@ function charter (start) {
 
 
 var LINES = [
-    {id : 'avg', 'title': 'keskiarvo', color: 'blue'},
-    //{id : 'min', title: 'minimi', color: '#ff0000'},
-    //{id : 'max', title: 'maksimi', color: '#ff0000'},
-    {id : 'halymin', title: 'huomiorajaminimi', color: 'red'},
-    {id : 'halymax', title: 'huomiorajamaksimi', color: 'red'}
+    {id : 'avg', 'title': 'keskiarvo', color: 'blue', width: 2, dashstyle: 'Solid'},
+    {id : 'halymin', title: 'huomiorajaminimi', color: 'red', width: 1, dashstyle: 'ShortDash'},
+    {id : 'halymax', title: 'huomiorajamaksimi', color: 'red', width: 1, dashstyle: 'ShortDash'}
 ];
 
 function update_plotlines() {
@@ -121,10 +94,17 @@ function update_plotlines() {
             chart.yAxis[0].addPlotLine({
                 value: obs[line.id],
                 color: line.color,
-                width: 2,
+                width: line.width,
                 zIndex: 4,
-                label: {text: line.title},
-                id: line.id
+                label: {
+                    text: line.title,
+                    style: {
+                        color: line.color,
+                        fontWeight: 'bold'
+                    }
+                },
+                id: line.id,
+                dashStyle: line.dashstyle
             });
         }
     });

@@ -27,6 +27,7 @@ def import_data():
 
     for obs in Observer.objects.all():
         try:
+            print location + obs.datasource_path
             r = requests.get(location + obs.datasource_path)
         except requests.exceptions.ConnectionError, e:
             print obs.datasource_path, e
@@ -76,7 +77,11 @@ def process(doc):
     resp = {"observations": []}
     lines = doc.splitlines()
     for l in lines:
-        first, second = l.strip().split(" ")
+        try:
+            first, second = l.strip().split(" ")
+        except Exception, e:
+            print l
+            raise e
         if first.isalpha():
             resp[first] = second
         else:
