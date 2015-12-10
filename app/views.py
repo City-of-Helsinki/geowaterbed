@@ -50,11 +50,8 @@ def index(request):
 
     data = {'observators': {}}
 
-    observers = Observer.objects.all().order_by('address')
+    observers = Observer.objects.exclude(loc_x=None).order_by('address')
     for obs in observers:
-        if not obs.loc_x and not obs.loc_y:
-            # Empty location, not that useful for map
-            continue
         data['observators'][obs.name] = {
             'name': obs.name,
             'location': {'x': obs.loc_x,
@@ -70,6 +67,7 @@ def index(request):
     selected = observers[0]
     data['selected'] = selected.name
     data['range'] = DEFAULT_MONTH_SPAN
+    print data['observators'].get(selected.name), selected.name
     data['observators'][selected.name]['observations'] = get_data(selected, "all")
 
     jsdata = json.dumps(data)
