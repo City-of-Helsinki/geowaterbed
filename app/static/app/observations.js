@@ -1,7 +1,7 @@
 
 var chart = null;
 
-function get_title(obs) {
+function get_title(obs, no_dates) {
     var title;
     switch (obs.type) {
         case 'pohja':
@@ -14,9 +14,10 @@ function get_title(obs) {
             title = "Veden korkeus ja normaalitaso";
     }
 
-    moment.locale('fi');
-    title = title + ' ' + moment(obs.first).format('l') + ' - ' + moment(obs.last).format('l');
-
+    if (!no_dates) {
+        moment.locale('fi');
+        title = title + ' ' + moment(obs.first).format('l') + ' - ' + moment(obs.last).format('l');
+    }
     return title;
 }
 
@@ -41,7 +42,7 @@ function charter (start) {
         },
         yAxis: {
             title: {
-                text: 'Pohjaveden korkeus'
+                text: get_title(SERIES.observators[SERIES.selected], true)
             }
         },
         legend: {
