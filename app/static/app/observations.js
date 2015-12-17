@@ -134,7 +134,12 @@ function update_observator(key) {
 
 function filter_data(range, data) {
 
-    if (range === 'all') return data;
+    if (range === 'all') {
+        SERIES.observators[SERIES.selected].first = data[0][0];
+        SERIES.observators[SERIES.selected].last = data[data.length - 1][0];
+        SERIES.observators[SERIES.selected].selected_amount = data.length;
+        return data;
+    }
 
     // Take last observation which is assumed to be latest
     var last = data[data.length - 1];
