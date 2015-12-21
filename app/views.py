@@ -64,15 +64,14 @@ def index(request):
             'type': obs.type,
             'address': obs.address
         }
+
     selected = observers[0]
     data['selected'] = selected.name
     data['range'] = DEFAULT_MONTH_SPAN
-    print data['observators'].get(selected.name), selected.name
     data['observators'][selected.name]['observations'] = get_data(selected, "all")
 
-    jsdata = json.dumps(data)
     return render(request, "app/index.html", {'observators': observers,
-                                              'observations': jsdata})
+                                              'observations': json.dumps(data)})
 
 DEFAULT_MONTH_SPAN = 6
 
