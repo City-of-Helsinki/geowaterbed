@@ -27,7 +27,6 @@ def import_data():
 
     for obs in Observer.objects.all():
         try:
-            print location + obs.datasource_path
             r = requests.get(location + obs.datasource_path)
         except requests.exceptions.ConnectionError, e:
             print obs.datasource_path, e
@@ -88,10 +87,11 @@ def process(doc):
             try:
                 dt = datetime.datetime.strptime(first, '%d.%m.%Y')
                 d = dt.date()
-                meas = Measurement(d, second)
-                resp["observations"].append(meas)
             except ValueError, e:
                 print "Datetime conversion error", doc, first
+                continue
+            meas = Measurement(d, second)
+            resp["observations"].append(meas)
     return resp
 
 
