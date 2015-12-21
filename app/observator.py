@@ -26,6 +26,9 @@ def import_data():
         raise ImproperlyConfigured("Data import needs DATA_IMPORT_BASEURL in settings")
 
     for obs in Observer.objects.all():
+        if not obs.datasource_path:
+            print "Observer has no data source path to fetch from", obs
+            continue
         try:
             r = requests.get(location + obs.datasource_path)
         except requests.exceptions.ConnectionError, e:
