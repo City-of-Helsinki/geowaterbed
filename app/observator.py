@@ -21,16 +21,22 @@ def import_data():
     :return: None
     """
 
-    location = getattr(settings, "DATA_IMPORT_BASEURL", None)
-    if not location:
+    baselocation = getattr(settings, "DATA_IMPORT_BASEURL", None)
+    if not baselocation:
         raise ImproperlyConfigured("Data import needs DATA_IMPORT_BASEURL in settings")
 
     for obs in Observer.objects.all():
+
+        if obs.datasource_path.startswith('http://') or obs.datasource_path.startswith('https://'):
+            url = obs.datasource_path
+        else:
+            url = baselocation + obs.datasource_path
+
         if not obs.datasource_path:
             print "Observer has no data source path to fetch from", obs
             continue
         try:
-            r = requests.get(location + obs.datasource_path)
+            r = requests.get(url)
         except requests.exceptions.ConnectionError, e:
             print obs.datasource_path, e
             return False
